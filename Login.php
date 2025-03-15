@@ -13,14 +13,18 @@
     if (isset($_GET['error'])) {
         echo "<p style='color:red;'>Invalid email or password.</p><br>";
     }
+    $saved_email = isset($_COOKIE['email']) ? $_COOKIE['email'] : '';
+    $saved_password = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
     ?>
     
     <form action = "Login.php" method = "post" enctype = "multipart/form-data">
-        <label for = "email">Email: </label>
-        <input type = "text" name = "email"><br><br>
-        <label for = "password">Password: </label>
-        <input type = "password" name = "password"><br><br>
+    <label for="email">Email: </label>
+        <input type="text" name="email" value="<?php echo $saved_email; ?>"><br><br>   
+        <label for="password">Password: </label>
+        <input type="password" name="password" value="<?php echo $saved_password; ?>"><br><br>
+        <input type="checkbox" name="remember_me"> Remember Me<br><br>
         <button type="submit" name ="submit" >Login</button><br><br>
+        <a href="forgot_password.php">Forgot Password?</a><br><br>
     </form>
 </body>
 </html>
@@ -43,6 +47,7 @@ $server = "localhost";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($conn, $_POST["email"]);
     $password = $_POST["password"];
+    $remember_me = isset($_POST["remember_me"]);
 
     // Get user from database
     $sql = "SELECT * FROM users WHERE email='$email'";
@@ -57,6 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["username"] = $user["username"];
             $_SESSION["email"] = $user["email"];
             $_SESSION["profile_picture"] = $user["profile_picture"];
+
+            if ($remember_me) {
+                setcookie("email", $email, time() + (86400 * 30), "/"); // 30 days
+                setcookie("password", $password, time() + (86400 * 30), "/"); 
+            }
 
             header("Location: dashboard.php");
             exit();
