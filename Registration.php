@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         die("File is too large. Max 5MB allowed.");
     }
 
-    $allowed_types = ["jpg", "jpeg", "png", "gif"];
+    $allowed_types = ["jpg", "jpeg", "png"];
     if (!in_array($imageFileType, $allowed_types)) {
         die("Only JPG, JPEG, PNG & GIF files are allowed.");
     }
