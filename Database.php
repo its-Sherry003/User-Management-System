@@ -21,7 +21,7 @@ if(mysqli_query($conn, $newDatabase)){
 $insert = "CREATE TABLE users 
             (id INT AUTO_INCREMENT PRIMARY KEY,
             username varchar(15) NOT NULL,
-            email varchar(20) NOT NULL,
+            email varchar(50) NOT NULL,
             password varchar(255) NOT NULL,
             profile_picture varchar(255) NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
