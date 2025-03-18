@@ -31,5 +31,17 @@ if(mysqli_query($conn,$insert)){
     echo "Failed";
 }
 
+$password_reset = "CREATE TABLE password_reset_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expiry DATETIME NOT NULL
+)";
+if(mysqli_query($conn,$password_reset)){
+    echo "Created";
+}else{
+    echo "Failed";
+}
+
 
 ?>
