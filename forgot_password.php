@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result && mysqli_num_rows($result) > 0) {
         // Generate a unique reset token
+        date_default_timezone_set('Africa/Kampala');
         $token = bin2hex(random_bytes(50));
         $expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
 
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_query($conn, $insertQuery);
 
         // Create the reset link
-        $reset_link = "http://yourwebsite.com/reset_password.php?token=$token";
+        $reset_link = "http://http://localhost/user-management-System/reset_password.php?token=$token";
         $subject = "Password Reset Request";
         $message = "Click the link to reset your password: $reset_link";
 
@@ -48,12 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Host = 'smtp.gmail.com'; 
             $mail->SMTPAuth = true;
             $mail->Username = 'youremail@gmail.com';
-            $mail->Password = 'your password';
+            $mail->Password = 'password';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
+            
+
 
             // Email settings
-            $mail->setFrom('ug.hrm.system@gmail.com', 'Group D');
+            $mail->setFrom('youremail@gmail.com', 'Group D User management');
             $mail->addAddress($email);
             $mail->Subject = $subject;
             $mail->Body = $message;
