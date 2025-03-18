@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_query($conn, $deleteQuery);
 
     echo "Password reset successful! <a href='Login.php'>Login</a>";
+    header("Location: Login.php");
     exit();
 }
 ?>

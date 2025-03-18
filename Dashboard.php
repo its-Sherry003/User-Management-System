@@ -26,6 +26,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("Location: delete_account.php");
         exit();
     }
+    if(isset($_POST["edit_details"])){
+        header("Location: edit_details.php");
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -112,24 +116,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         <form action="Dashboard.php" method="post">
             <div class="button-group">
+                <button type="submit" name="edit_details" class="edit_details">Edit Details</button>
                 <button type="submit" name="logout" class="logout-btn">Logout</button>
                 <button type="submit" name="delete" class="delete-btn">Delete Account</button>
             </div>
         </form>
     </div>
-</body>
-</html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
-</head>
-<body>
-    <h4>This is the Home page</h4><br><br>
-    <form action = "Dashboard.php" method = "post">
-    <button type = "submit" name = "logout">Logout</button><br>
-    <button type = "submit" name = "delete" >Delete Account</button>
-    </form>
 </body>
 </html>
