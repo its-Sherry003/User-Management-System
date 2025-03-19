@@ -17,7 +17,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
+    
+    /*$newDatabase = "CREATE DATABASE user_management";
+    if(mysqli_query($conn, $newDatabase)){
+        echo "Database created";
+    }else{
+        echo "Failed";
+    }*/
+    
+    /*$insert = "CREATE TABLE users 
+                (id INT AUTO_INCREMENT PRIMARY KEY,
+                username varchar(15) NOT NULL,
+                email varchar(20) NOT NULL,
+                password varchar(255) NOT NULL,
+                profile_picture varchar(255) NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
+    if(mysqli_query($conn,$insert)){
+        echo "Created";
+    }else{
+        echo "Failed";
+    }*/
+    //Collecting User details
     if(isset($_POST["register"])){
     $username = mysqli_real_escape_string($conn, $_POST["username"]);
     $email = mysqli_real_escape_string($conn, $_POST["email"]);
@@ -37,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $allowed_types = ["jpg", "jpeg", "png"];
     if (!in_array($imageFileType, $allowed_types)) {
-        die("Only JPG, JPEG, PNG & GIF files are allowed.");
+        die("Only JPG, JPEG, PNG files are allowed.");
     }
     // Generate a unique filename
     $profile_pic = uniqid() . "." . $imageFileType; 
