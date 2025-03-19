@@ -51,18 +51,19 @@
             cursor: pointer;
             margin-top: 10px;
         }
+        
         button:hover {
             background: #218838;
         }
         .register-btn {
             background: #007bff;
         }
+        
         .register-btn:hover {
             background: #0056b3;
         }
-        .error-message {
-            color: red;
-            margin-bottom: 15px;
+        .login-btn {
+            background:rgb(167, 40, 101);
         }
         .remember-me {
             text-align: left;
@@ -102,13 +103,13 @@
                 <label for="remember_me">Remember Me</label>
             </div>
             
-            <button type="submit" name="submit">Login</button>
+            <button type="submit" name="submit" class="login-btn">Login</button>
         </form>
         
         <a href="forgot_password.php" class="forgot-password">Forgot Password?</a>
         
         <form action="Login.php" method="post">
-            <button type="submit" name="register" class="login-btn">Register</button>
+            <button type="submit" name="register" class="register-btn">Register</button>
         </form>
     </div>
 </body>

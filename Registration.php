@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $allowed_types = ["jpg", "jpeg", "png"];
     if (!in_array($imageFileType, $allowed_types)) {
-        die("Only JPG, JPEG, PNG & GIF files are allowed.");
+        die("Only JPG, JPEG, PNG files are allowed.");
     }
     // Generate a unique filename
     $profile_pic = uniqid() . "." . $imageFileType; 

@@ -83,15 +83,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             font-size: 16px;
             transition: background-color 0.3s;
         }
+        .edit_details {
+            background:rgb(178, 208, 26);
+            color: white;
+        }
         .logout-btn {
-            background: #dc3545;
+            background:rgb(52, 11, 201);
             color: white;
         }
         .logout-btn:hover {
-            background: #c82333;
+            background:rgb(38, 200, 35);
         }
         .delete-btn {
-            background: #6c757d;
+            background:rgb(206, 7, 7);
             color: white;
         }
         .delete-btn:hover {
