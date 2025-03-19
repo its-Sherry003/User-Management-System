@@ -4,34 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN FORM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .register-btn {
+            background: #007bff;
+        }
+        .register-btn:hover {
+            background: #0056b3;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+        .remember-me {
+            text-align: left;
+            margin: 10px 0;
+        }
+        .forgot-password {
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>LOGIN FORM</h2><br>
-
-    <?php
-    // Display error message if it exists
-    if (isset($_GET['error'])) {
-        echo "<p style='color:red;'>Invalid email or password.</p><br>";
-    }
-    $saved_email = isset($_COOKIE['email']) ? $_COOKIE['email'] : '';
-    $saved_password = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
-    ?>
-    
-    <form action = "Login.php" method = "post" enctype = "multipart/form-data">
-    <label for="email">Email: </label>
-        <input type="text" name="email" value="<?php echo $saved_email; ?>"><br><br>   
-        <label for="password">Password: </label>
-        <input type="password" name="password" value="<?php echo $saved_password; ?>"><br><br>
-        <input type="checkbox" name="remember_me"> Remember Me<br><br>
-        <button type="submit" name ="submit" >Login</button><br><br>
-        <a href="forgot_password.php">Forgot Password?</a><br><br>
-    </form>
+    <div class="container">
+        <h2>LOGIN</h2>
+        <?php
+        if (isset($_GET['error'])) {
+            echo "<p class='error-message'>Invalid email or password.</p>";
+        }
+        $saved_email = isset($_COOKIE['email']) ? $_COOKIE['email'] : '';
+        $saved_password = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
+        ?>
+        
+        <form action="Login.php" method="post" enctype="multipart/form-data">
+            <label for="email">Email:</label>
+            <input type="text" name="email" value="<?php echo $saved_email; ?>" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="<?php echo $saved_password; ?>" required>
+            
+            <div class="remember-me">
+                <input type="checkbox" name="remember_me" id="remember_me">
+                <label for="remember_me">Remember Me</label>
+            </div>
+            
+            <button type="submit" name="submit">Login</button>
+        </form>
+        
+        <a href="forgot_password.php" class="forgot-password">Forgot Password?</a>
+        
+        <form action="Login.php" method="post">
+            <button type="submit" name="register" class="login-btn">Register</button>
+        </form>
+    </div>
 </body>
 </html>
 
 <?php
 session_start();
-$server = "localhost";
+    $server = "localhost";
     $username = "root";
     $password = "";
     $database = "user_management";
@@ -45,6 +130,12 @@ $server = "localhost";
 
     // Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //redirect to registration page when register button is clicked
+    if(isset($_POST["register"])){
+        header("Location: Registration.php");
+        exit();
+    }
+    //get email and password from form
     $email = mysqli_real_escape_string($conn, $_POST["email"]);
     $password = $_POST["password"];
     $remember_me = isset($_POST["remember_me"]);
@@ -82,4 +173,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
